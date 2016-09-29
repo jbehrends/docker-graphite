@@ -24,8 +24,8 @@ RUN \
     python \
     py2-pip \
     py-cairo \
-    py-twisted \
-    py-gunicorn \
+    # py-twisted \
+    # py-gunicorn \
     py-parsing \
     py-mysqldb \
     pwgen \
