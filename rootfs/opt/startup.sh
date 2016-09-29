@@ -146,7 +146,8 @@ configureDatabase() {
 
   sleep 2s
 
-  PYTHONPATH=/opt/graphite/webapp django-admin.py migrate --settings=graphite.settings --noinput
+  PYTHONPATH=/opt/graphite/webapp django-admin.py migrate --verbosity 1 --settings=graphite.settings --noinput
+  PYTHONPATH=/opt/graphite/webapp django-admin.py migrate --verbosity 1 --run-syncdb --settings=graphite.settings --noinput
 
   touch ${initfile}
 }
