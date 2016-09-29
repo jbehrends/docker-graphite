@@ -3,7 +3,7 @@ FROM bodsch/docker-alpine-base:1609-01
 
 MAINTAINER Bodo Schulz <bodo@boone-schulz.de>
 
-LABEL version="1.5.0"
+LABEL version="1.5.1"
 
 # 2003: Carbon line receiver port
 # 7002: Carbon cache query port
@@ -42,13 +42,15 @@ RUN \
   cd /src/whisper      &&  python setup.py install --quiet && \
   cd /src/carbon       &&  python setup.py install --quiet && \
   cd /src/graphite-web &&  python setup.py install --quiet && \
-  mv /opt/graphite/conf/graphite.wsgi.example /opt/graphite/webapp/graphite/graphite_wsgi.py && \
-  apk del --purge \
-    git && \
-  rm -rf \
-    /src \
-    /tmp/* \
-    /var/cache/apk/*
+  mv /opt/graphite/conf/graphite.wsgi.example /opt/graphite/webapp/graphite/graphite_wsgi.py
+
+#RUN \
+#  apk del --purge \
+#    git && \
+#  rm -rf \
+#    /src \
+#    /tmp/* \
+#    /var/cache/apk/*
 
 ADD rootfs/ /
 
