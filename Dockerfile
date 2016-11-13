@@ -1,9 +1,8 @@
 
-FROM bodsch/docker-alpine-base:1610-02
+FROM alpine:3.4
 
-MAINTAINER Bodo Schulz <bodo@boone-schulz.de>
+MAINTAINER Josh Behrends <josh@behrends.us>
 
-LABEL version="1.7.0"
 
 # 2003: Carbon line receiver port
 # 7002: Carbon cache query port
@@ -16,13 +15,14 @@ RUN \
   apk --no-cache update && \
   apk --no-cache upgrade && \
   apk --no-cache add \
+    supervisor \
     build-base \
     libffi-dev \
-    python2-dev \
+    python-dev \
     git \
     nginx \
     python \
-    py2-pip \
+    py-pip \
     py-cairo \
     py-parsing \
     py-mysqldb \
@@ -30,7 +30,7 @@ RUN \
     mysql-client && \
   pip install \
     --trusted-host http://d.pypi.python.org/simple --upgrade pip && \
-  mkdir /src && \
+  mkdir -p /opt /src /srv && \
   git clone https://github.com/graphite-project/whisper.git      /src/whisper      && \
   git clone https://github.com/graphite-project/carbon.git       /src/carbon       && \
   git clone https://github.com/graphite-project/graphite-web.git /src/graphite-web && \
@@ -42,7 +42,7 @@ RUN \
   apk del --purge \
     build-base \
     libffi-dev \
-    python2-dev \
+    python-dev \
     git && \
   rm -rf \
     /src \
